@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -7,6 +6,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Dashboard from './src/screens/Dashboard';
 import Add from './src/screens/Add';
 import store from './src/features';
+import Login from './src/screens/Auth/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +19,7 @@ function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen
             name="Dashboard"
             component={Dashboard}
@@ -35,20 +36,4 @@ function App() {
   );
 }
 
-const style = StyleSheet.create({
-  section: {
-    width: 200,
-    height: 50,
-    marginLeft: 50,
-    marginRight: 50,
-    backgroundColor: 'red',
-  },
-  title: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-});
 export default App;
