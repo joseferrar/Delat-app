@@ -30,16 +30,15 @@ export default Button;
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 10,
+    borderRadius: 12,
     backgroundColor: '#6C63FF',
     paddingHorizontal: 50,
-    paddingVertical: 15,
-    marginLeft: 10,
-    marginRight: 10,
+    paddingVertical: 13,
+    margin: 14
   },
   btnTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Poppins-Medium',
   },
 });

@@ -1,6 +1,5 @@
 import {StyleSheet, TextInput} from 'react-native';
 import React from 'react';
-import useTheme from '../../hooks/useTheme';
 
 type InputProps = {
   value?: string | undefined;
@@ -8,18 +7,29 @@ type InputProps = {
   placeholder?: string | undefined;
   disabled?: boolean | undefined;
   style?: any;
+  color: string | undefined;
+  secureTextEntry?: boolean;
 };
 
 const Input = (props: InputProps) => {
-  const {value, onChangeText, disabled, placeholder, style} = props;
-  const theme = useTheme();
+  const {
+    value,
+    onChangeText,
+    disabled,
+    placeholder,
+    style,
+    color,
+    secureTextEntry,
+  } = props;
+
   return (
     <TextInput
       value={value}
       placeholder={placeholder}
       editable={disabled}
-      placeholderTextColor={theme.colors.text}
-      style={[styles.input, {color: theme.colors.text}, style]}
+      placeholderTextColor={color}
+      secureTextEntry={secureTextEntry}
+      style={[styles.input, {color: color}, style]}
       onChangeText={onChangeText}
     />
   );
@@ -31,9 +41,14 @@ const styles = StyleSheet.create({
   input: {
     borderColor: '#6C63FF',
     // width: "95%",
-    margin: 12,
+    marginBottom: 8,
+    marginTop: 8,
+    marginLeft: 14,
+    marginRight: 14,
     borderWidth: 2,
     borderRadius: 12,
     padding: 10,
+    fontFamily: 'Poppins-Light',
+    paddingStart: 18,
   },
 });

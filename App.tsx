@@ -7,6 +7,7 @@ import Dashboard from './src/screens/Dashboard';
 import Add from './src/screens/Add';
 import store from './src/features';
 import Login from './src/screens/Auth/Login';
+import Register from './src/screens/Auth/Register';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,16 @@ function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{headerShown: false}}
+          />
           <Stack.Screen
             name="Dashboard"
             component={Dashboard}

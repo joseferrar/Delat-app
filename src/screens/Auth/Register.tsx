@@ -12,7 +12,8 @@ import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 
-const Login = ({navigation}: any) => {
+const Register = (props: any) => {
+  const {navigation} = props;
   const theme = useTheme();
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
@@ -26,21 +27,42 @@ const Login = ({navigation}: any) => {
           style={styles.img}
         />
         <Text style={[styles.heading, {color: theme.colors.text}]}>
-          Continue to Delat!
+          Welcome to Delat!
         </Text>
+        <Input placeholder="Username" color={theme.colors.text} />
         <Input placeholder="Email" color={theme.colors.text} />
-        <Input placeholder="Password" color={theme.colors.text} />
+        <Input
+          placeholder="Password"
+          color={theme.colors.text}
+          secureTextEntry={true}
+        />
+        <Input
+          placeholder="Confirm Password"
+          color={theme.colors.text}
+          secureTextEntry={true}
+        />
         <Button
           title="Submit"
-          onPress={() => navigation.navigate('Register')}
+          onPress={theme.toggleTheme}
           style={styles.button}
         />
+
+        <View style={styles.footer}>
+          <Text style={[styles.footer_inner, {color: theme.colors.text}]}>
+            Already Registered ?
+          </Text>
+          <Text
+            style={styles.footer_btn}
+            onPress={() => navigation.navigate('Login')}>
+            Sign In
+          </Text>
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 };
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
   container: {
@@ -53,8 +75,6 @@ const styles = StyleSheet.create({
   img: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: 240,
-    height: 200,
   },
   button: {
     margin: 12,
@@ -64,5 +84,20 @@ const styles = StyleSheet.create({
     margin: 12,
     fontSize: 24,
     fontFamily: 'Poppins-Light',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  footer_inner: {
+    color: '#000',
+    fontSize: 15,
+    fontFamily: 'Poppins-Regular',
+  },
+  footer_btn: {
+    color: '#6C63FF',
+    marginLeft: 6,
+    fontSize: 15,
+    fontFamily: 'Poppins-Bold',
   },
 });

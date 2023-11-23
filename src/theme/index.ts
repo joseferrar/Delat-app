@@ -1,4 +1,4 @@
-type LightColors = {
+export type Colors = {
   primary: string;
   secondary: string;
   background: string;
@@ -7,7 +7,7 @@ type LightColors = {
   default: string;
 };
 
-const lightColors: LightColors = {
+const lightColors: Colors = {
   primary: '#6C63FF',
   secondary: '#7f7f7f',
   background: '#efefef',
@@ -19,7 +19,7 @@ const lightColors: LightColors = {
 const darkColors = {
   primary: lightColors.primary,
   secondary: '#7f7f7f',
-  background: '#101010',
+  background: '#222831',
   border: '#b0b0b0',
   text: '#fff',
   default: '#fff',
