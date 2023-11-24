@@ -11,6 +11,8 @@ import React from 'react';
 import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import TextButton from '../../components/Button/TextButton';
+import IconButton from '../../components/Button/IconButton';
 
 const Login = ({navigation}: any) => {
   const theme = useTheme();
@@ -30,11 +32,36 @@ const Login = ({navigation}: any) => {
         </Text>
         <Input placeholder="Email" color={theme.colors.text} />
         <Input placeholder="Password" color={theme.colors.text} />
-        <Button
-          title="Submit"
+        <TextButton
+          title="Forgot Password?"
           onPress={() => navigation.navigate('Register')}
-          style={styles.button}
+          style={styles.forgot_btn}
         />
+        <Button title="Login" style={styles.button} />
+        <Image
+          source={
+            theme.currentTheme === 'light'
+              ? require('../../assets/images/divier.png')
+              : require('../../assets/images/divier_dark.png')
+          }
+          style={styles.diverIcon}
+        />
+        <IconButton
+          title="Login with Google"
+          icon={require('../../assets/images/google_logo.png')}
+          containerStyle={styles.google}
+        />
+
+        <View style={styles.footer}>
+          <Text style={[styles.footer_inner, {color: theme.colors.text}]}>
+            Create a new account ?
+          </Text>
+          <Text
+            style={styles.footer_btn}
+            onPress={() => navigation.navigate('Register')}>
+            Sign Up
+          </Text>
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -59,10 +86,41 @@ const styles = StyleSheet.create({
   button: {
     margin: 12,
   },
+  forgot_btn: {
+    marginLeft: 'auto',
+    marginRight: 14,
+    marginTop: 8,
+  },
+  diverIcon: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    margin: 4,
+    width: '85%',
+  },
   heading: {
     textAlign: 'center',
     margin: 12,
     fontSize: 24,
-    fontFamily: 'Poppins-Light',
+    fontFamily: 'Poppins-Regular',
+  },
+  google: {
+    backgroundColor: '#DDDDDD',
+    borderColor: '#DDDDDD',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    margin: 12
+  },
+  footer_inner: {
+    color: '#000',
+    fontSize: 15,
+    fontFamily: 'Poppins-Regular',
+  },
+  footer_btn: {
+    color: '#6C63FF',
+    marginLeft: 6,
+    fontSize: 15,
+    fontFamily: 'Poppins-Bold',
   },
 });

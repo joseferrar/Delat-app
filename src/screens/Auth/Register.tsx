@@ -83,11 +83,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 12,
     fontSize: 24,
-    fontFamily: 'Poppins-Light',
+    fontFamily: 'Poppins-Regular',
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
+    margin: 12,
   },
   footer_inner: {
     color: '#000',
