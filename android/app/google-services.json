@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593672927589",
+    "project_id": "delat-8a359",
+    "storage_bucket": "delat-8a359.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593672927589:android:cd624a90356d244c0d898c",
+        "android_client_info": {
+          "package_name": "com.delat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhii-zOljravy46pcomBb3Axmj4s-YxX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
