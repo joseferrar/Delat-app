@@ -12,7 +12,20 @@
           "package_name": "com.delat"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "593672927589-50c5dd73ok0bpqaegr2ph8pd8er8ge4b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.delat",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "593672927589-ee90f9j0j9iab8eevuujgiitcfik8jb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAhii-zOljravy46pcomBb3Axmj4s-YxX4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593672927589-ee90f9j0j9iab8eevuujgiitcfik8jb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -43,7 +43,7 @@ const Register = (props: any) => {
         />
         <Button
           title="Submit"
-          onPress={theme.toggleTheme}
+          // onPress={theme.toggleTheme}
           style={styles.button}
         />
 

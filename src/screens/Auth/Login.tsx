@@ -8,6 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
@@ -17,6 +19,29 @@ import IconButton from '../../components/Button/IconButton';
 const Login = ({navigation}: any) => {
   const theme = useTheme();
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
+
+  GoogleSignin.configure({
+    webClientId:
+      '593672927589-ee90f9j0j9iab8eevuujgiitcfik8jb3.apps.googleusercontent.com',
+  });
+
+  const onGoogleButtonPress = async () => {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken, user} = await GoogleSignin.signIn();
+    // if (idToken && user) {
+    //   navigation.navigate('Dashboard');
+    // }
+    console.log('idToken', idToken);
+    console.log('user', user);
+
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    console.log('googleCredential', googleCredential);
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -31,10 +56,14 @@ const Login = ({navigation}: any) => {
           Continue to Delat!
         </Text>
         <Input placeholder="Email" color={theme.colors.text} />
-        <Input placeholder="Password" color={theme.colors.text} />
+        <Input
+          placeholder="Password"
+          color={theme.colors.text}
+          secureTextEntry={true}
+        />
         <TextButton
           title="Forgot Password?"
-          onPress={() => navigation.navigate('Register')}
+          onPress={theme.toggleTheme}
           style={styles.forgot_btn}
         />
         <Button title="Login" style={styles.button} />
@@ -47,6 +76,7 @@ const Login = ({navigation}: any) => {
           style={styles.diverIcon}
         />
         <IconButton
+          onPress={onGoogleButtonPress}
           title="Login with Google"
           icon={require('../../assets/images/google_logo.png')}
           containerStyle={styles.google}
@@ -110,7 +140,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    margin: 12
+    margin: 12,
   },
   footer_inner: {
     color: '#000',
