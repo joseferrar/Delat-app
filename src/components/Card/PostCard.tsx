@@ -1,66 +1,69 @@
-import { StyleSheet, Text, TouchableWithoutFeedback, View, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import {
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import useTheme from '../../hooks/useTheme';
 
-const PostCard = ({ title, onPress }: any) => {
+interface descObject {
+  id: number;
+  text: string;
+}
+
+type PostCardType = {
+  title: string;
+  onPress?: () => void;
+  description: descObject[];
+};
+const PostCard = ({title, description, onPress}: PostCardType) => {
+  const theme = useTheme();
   return (
     <View>
-      <TouchableWithoutFeedback>
-        <View style={styles.mainCardView}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
-            <View style={{ marginLeft: 12, marginBottom: 12 }}>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View
+          style={[
+            styles.mainCardView,
+            {
+              backgroundColor: theme.colors.info,
+              borderColor: theme.colors.border,
+            },
+          ]}>
+          <View style={styles.card}>
+            <Text style={[styles.title, {color: theme.colors.text}]}>
+              {title}
+            </Text>
+            {description.map((item: descObject) => (
               <Text
-                style={{
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: 'bold',
-                  textTransform: 'capitalize',
-                  lineHeight: 24,
-
-                  margin: 6
-                }}>
-                {title}
+                style={[styles.description, {color: theme.colors.text}]}
+                key={item.id}>
+                {`\u25CF  ${item.text}`}
               </Text>
-              <TouchableOpacity
-                onPress={onPress}
-                style={{
-                  height: 30,
-                  backgroundColor: 'red',
-                  borderWidth: 0,
-                  width: 80,
-                  borderRadius: 12,
-                  marginTop: 6
-                }}>
-                <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold', lineHeight: 26 }}>
-                  Remove
-                </Text>
-              </TouchableOpacity>
-            </View>
-
+            ))}
           </View>
-
         </View>
       </TouchableWithoutFeedback>
     </View>
-  )
-}
+  );
+};
 
-export default PostCard
+export default PostCard;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   mainCardView: {
-
+    width: '50%',
     backgroundColor: Colors.white,
     borderRadius: 15,
     shadowColor: Colors.shadow,
-    shadowOffset: { width: 0, height: 0 },
+    shadowOffset: {width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 8,
     elevation: 8,
     flexDirection: 'row',
+    borderWidth: 1,
     // justifyContent: 'space-between',
     paddingLeft: 1,
     paddingRight: 1,
@@ -69,4 +72,26 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginRight: 16,
   },
-})
+  card: {
+    marginLeft: 12,
+    marginBottom: 12,
+  },
+  title: {
+    fontSize: 18,
+    color: Colors.black,
+    textTransform: 'capitalize',
+    marginTop: 6,
+    marginLeft: 8,
+    marginRight: 8,
+    fontFamily: 'Poppins-Medium',
+  },
+  description: {
+    fontSize: 14,
+    color: Colors.black,
+    lineHeight: 20,
+    margin: 6,
+    marginLeft: 8,
+    marginRight: 8,
+    fontFamily: 'Poppins-Regular',
+  },
+});

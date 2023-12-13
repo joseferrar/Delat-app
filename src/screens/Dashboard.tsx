@@ -2,11 +2,17 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import PostCard from '../components/Card/PostCard';
+import useTheme from '../hooks/useTheme';
+import {testData} from '../utils/data';
 
 const Dashboard = () => {
+  const theme = useTheme();
   return (
-    <View style={{flex: 1, backgroundColor: '#dbd7d2'}}>
-      <Text>{auth().currentUser?.email}</Text>
+    <View style={[style.container, {backgroundColor: theme.colors.background}]}>
+      <Text style={{color: theme.colors.text, textAlign: 'center'}}>
+        {auth().currentUser?.email}
+      </Text>
       <Button
         title="logout"
         onPress={async () => {
@@ -15,6 +21,8 @@ const Dashboard = () => {
           await GoogleSignin.signOut();
         }}
       />
+      <Button title="Dark mode" onPress={theme.toggleTheme} />
+      <PostCard title="Todo list" description={testData} />
     </View>
   );
 };
@@ -22,6 +30,9 @@ const Dashboard = () => {
 export default Dashboard;
 
 const style = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   section: {
     width: 200,
     height: 50,

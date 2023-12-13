@@ -2,7 +2,8 @@ export type Colors = {
   primary: string;
   secondary: string;
   background: string;
-  border: string;
+  info: string;
+  border?: string;
   text: string;
   default: string;
 };
@@ -11,7 +12,8 @@ const lightColors: Colors = {
   primary: '#6C63FF',
   secondary: '#7f7f7f',
   background: '#efefef',
-  border: '#303030',
+  info: '#fff',
+  border: '#fff',
   text: '#000',
   default: '#fff',
 };
@@ -19,9 +21,10 @@ const lightColors: Colors = {
 const darkColors = {
   primary: lightColors.primary,
   secondary: '#7f7f7f',
-  background: '#222831',
-  border: '#b0b0b0',
+  background: '#000',
+  info: '#222831',
   text: '#fff',
+  border: lightColors.secondary,
   default: '#fff',
 };
 
