@@ -5,11 +5,19 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import PostCard from '../components/Card/PostCard';
 import useTheme from '../hooks/useTheme';
 import {testData} from '../utils/data';
+import {Modal} from '../components/Modal';
+import SumbitButton from '../components/Button/Button';
+import TextButton from '../components/Button/TextButton';
+import ConfirmModal from '../components/Modal/ConfirmModal';
 
 const Dashboard = () => {
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
   const theme = useTheme();
+
+  const handleModal = () => setIsModalVisible(() => !isModalVisible);
   return (
-    <View style={[style.container, {backgroundColor: theme.colors.background}]}>
+    <View
+      style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <Text style={{color: theme.colors.text, textAlign: 'center'}}>
         {auth().currentUser?.email}
       </Text>
@@ -23,13 +31,18 @@ const Dashboard = () => {
       />
       <Button title="Dark mode" onPress={theme.toggleTheme} />
       <PostCard title="Todo list" description={testData} />
+      <Button title="button" onPress={handleModal} />
+      <ConfirmModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+      />
     </View>
   );
 };
 
 export default Dashboard;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -46,5 +59,12 @@ const style = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     marginTop: 10,
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#000',
+    fontFamily: 'Poppins-Light',
+    textTransform: 'capitalize',
   },
 });
