@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "593672927589-bohlga41stjuob9hjbquch50qg6eugl9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.delat",
+            "certificate_hash": "13926bf251bc50e5a67662f99cda75aac46e8a75"
+          }
+        },
+        {
+          "client_id": "593672927589-utes1dojau4hadulfdf44lliplfe64t4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.delat",
+            "certificate_hash": "27004a9a02737cb79674b50354e877ba4cec27b5"
+          }
+        },
+        {
           "client_id": "593672927589-ee90f9j0j9iab8eevuujgiitcfik8jb3.apps.googleusercontent.com",
           "client_type": 3
         }
