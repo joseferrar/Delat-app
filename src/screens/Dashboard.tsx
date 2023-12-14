@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Button} from 'react-native';
+import {StyleSheet, Text, View, Button, Alert} from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -9,33 +9,29 @@ import {Modal} from '../components/Modal';
 import SumbitButton from '../components/Button/Button';
 import TextButton from '../components/Button/TextButton';
 import ConfirmModal from '../components/Modal/ConfirmModal';
+import {useAppDispatch} from '../features';
+import {showModal} from '../features/commonSlice';
 
 const Dashboard = () => {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+  const logOut = async () => {
+    await GoogleSignin.revokeAccess();
+    await GoogleSignin.signOut();
+    await auth().signOut();
+    dispatch(showModal(false));
+  };
   return (
     <View
       style={[styles.container, {backgroundColor: theme.colors.background}]}>
       <Text style={{color: theme.colors.text, textAlign: 'center'}}>
         {auth().currentUser?.email}
       </Text>
-      <Button
-        title="logout"
-        onPress={async () => {
-          await auth().signOut();
-          // await GoogleSignin.revokeAccess();
-          await GoogleSignin.signOut();
-        }}
-      />
+      <Button title="logout" onPress={() => dispatch(showModal(true))} />
       <Button title="Dark mode" onPress={theme.toggleTheme} />
       <PostCard title="Todo list" description={testData} />
-      <Button title="button" onPress={handleModal} />
-      <ConfirmModal
-        isModalVisible={isModalVisible}
-        setIsModalVisible={setIsModalVisible}
-      />
+      <ConfirmModal onSubmit={logOut} />
     </View>
   );
 };

@@ -1,21 +1,21 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {Dispatch} from 'react';
+import React from 'react';
 import {Modal} from '../../components/Modal';
 import Button from '../../components/Button/Button';
 import TextButton from '../../components/Button/TextButton';
 import useTheme from '../../hooks/useTheme';
+import {useSelector} from 'react-redux';
+import {RootState, useAppDispatch} from '../../features';
+import {showModal} from '../../features/commonSlice';
 
-type ModalProps = {
-  isModalVisible: boolean;
-  setIsModalVisible: Dispatch<React.SetStateAction<boolean>>;
-};
-
-const ConfirmModal = ({isModalVisible, setIsModalVisible}: ModalProps) => {
+const ConfirmModal = ({onSubmit}: any) => {
+  const {isModal} = useSelector((state: RootState) => state.common);
   const theme = useTheme();
-  const handleModal = () => setIsModalVisible(() => !isModalVisible);
+
+  const dispatch = useAppDispatch();
   return (
     <View>
-      <Modal isVisible={isModalVisible}>
+      <Modal isVisible={isModal}>
         <Modal.Container>
           <Modal.Header title="Comback Soon!" />
           <Modal.Body>
@@ -24,13 +24,13 @@ const ConfirmModal = ({isModalVisible, setIsModalVisible}: ModalProps) => {
           <Modal.Footer>
             <TextButton
               title="Cancel"
-              onPress={handleModal}
+              onPress={() => dispatch(showModal(false))}
               style={styles.button}
             />
             <Button
               title="Yes, Logout"
-              onPress={handleModal}
               style={[styles.button, {backgroundColor: theme.colors.danger}]}
+              onPress={onSubmit}
             />
           </Modal.Footer>
         </Modal.Container>
