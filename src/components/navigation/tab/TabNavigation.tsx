@@ -17,6 +17,7 @@ function TabNavigation() {
   return (
     <Tab.Navigator
       screenOptions={({route, navigation}): any => ({
+        tabBarHideOnKeyboard: true,
         tabBarIcon: ({focused, color, size}: any) => {
           return (
             <Image
@@ -37,7 +38,7 @@ function TabNavigation() {
           elevation: 4,
           height: 65,
           borderRadius: 12,
-          bottom: 10,
+          bottom: 5,
           marginLeft: 12,
           marginRight: 12,
         },
@@ -82,14 +83,14 @@ export default TabNavigation;
 
 const styles = StyleSheet.create({
   plus_active: {
-    width: 60,
-    height: 60,
-    marginTop: -24,
-    marginLeft: 4
+    width: 40,
+    height: 40,
+    marginTop: 12,
+    marginLeft: 4,
   },
   plus_inactive: {
-    width: 34,
-    height: 34,
+    width: 28,
+    height: 28,
     marginTop: 8,
   },
 });

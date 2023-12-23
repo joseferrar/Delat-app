@@ -1,8 +1,7 @@
-import {StyleSheet, Text, View, Button, Alert} from 'react-native';
+import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import PostCard from '../components/Card/PostCard';
 import useTheme from '../hooks/useTheme';
 import {testData} from '../utils/data';
 import {Modal} from '../components/Modal';
@@ -11,8 +10,11 @@ import TextButton from '../components/Button/TextButton';
 import ConfirmModal from '../components/Modal/ConfirmModal';
 import {useAppDispatch} from '../features';
 import {showModal} from '../features/commonSlice';
+import SearchInput from '../components/Input/SearchInput';
+import KeyboardView from '../components/Container/KeyboardView';
+import BoardList from '../components/List/BoardList';
 
-const Dashboard = () => {
+const Dashboard = ({navigation}: any) => {
   const theme = useTheme();
   const dispatch = useAppDispatch();
 
@@ -23,25 +25,22 @@ const Dashboard = () => {
     dispatch(showModal(false));
   };
   return (
-    <View
-      style={[styles.container, {backgroundColor: theme.colors.background}]}>
-      <Text style={{color: theme.colors.text, textAlign: 'center'}}>
+    <KeyboardView style={{backgroundColor: theme.colors.background}}>
+      {/* <Text style={{color: theme.colors.text, textAlign: 'center'}}>
         {auth().currentUser?.email}
-      </Text>
-      <Button title="logout" onPress={() => dispatch(showModal(true))} />
-      <Button title="Dark mode" onPress={theme.toggleTheme} />
-      <PostCard title="Todo list" description={testData} />
+      </Text> */}
+      <SearchInput />
+      {/* <Button title="logout" onPress={() => dispatch(showModal(true))} />
+      <Button title="Dark mode" onPress={theme.toggleTheme} /> */}
+      <BoardList data={testData} navigation={navigation} />
       <ConfirmModal onSubmit={logOut} />
-    </View>
+    </KeyboardView>
   );
 };
 
 export default Dashboard;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   section: {
     width: 200,
     height: 50,

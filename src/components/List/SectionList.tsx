@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PostCard from '../Card/PostCard';
+import PostCard from '../Card/BoardCard';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
