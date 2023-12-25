@@ -10,7 +10,7 @@ export const topics: TOPIC[] = [
   },
   {
     id: 2,
-    topic: 'List Item',
+    topic: 'ListItems',
   },
   {
     id: 3,

@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput} from 'react-native';
+import {StyleSheet, TextInput, ViewStyle} from 'react-native';
 import React from 'react';
 
 type InputProps = {
@@ -6,7 +6,7 @@ type InputProps = {
   onChangeText?: ((e: string) => void) | undefined;
   placeholder?: string | undefined;
   disabled?: boolean | undefined;
-  style?: any;
+  style?: ViewStyle;
   color: string | undefined;
   secureTextEntry?: boolean;
 };
