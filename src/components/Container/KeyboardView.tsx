@@ -1,4 +1,4 @@
-import {Keyboard, KeyboardAvoidingView, StyleSheet, Text} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, StyleSheet} from 'react-native';
 import React from 'react';
 
 const KeyboardView = ({children, style}: any) => {

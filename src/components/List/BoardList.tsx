@@ -1,6 +1,6 @@
 import {StyleSheet, FlatList, View} from 'react-native';
 import React from 'react';
-import PostCard from '../Card/BoardCard';
+import BoardCard from '../Card/BoardCard';
 
 const BoardList = ({data, navigation}: any) => {
   return (
@@ -13,7 +13,7 @@ const BoardList = ({data, navigation}: any) => {
       // ListEmptyComponent={<NotFound/>}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
-        <PostCard title={item.title} description={item.desc} />
+        <BoardCard title={item.title} description={item.desc} />
       )}
     />
   );
