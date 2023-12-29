@@ -15,8 +15,12 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import TextButton from '../../components/Button/TextButton';
 import IconButton from '../../components/Button/IconButton';
+import {useAppDispatch} from '../../features';
+import {GoogleLogin} from '../../features/userSlice';
+import {GoogleService} from '../../services/userService';
 
 const Login = ({navigation}: any) => {
+  const dispatch = useAppDispatch();
   const theme = useTheme();
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
@@ -77,7 +81,7 @@ const Login = ({navigation}: any) => {
           style={styles.diverIcon}
         />
         <IconButton
-          onPress={onGoogleButtonPress}
+          onPress={() => GoogleService()}
           title="Login with Google"
           icon={require('../../assets/images/google_logo.png')}
           containerStyle={styles.google}

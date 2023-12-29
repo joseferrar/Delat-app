@@ -3,11 +3,13 @@ import logger from 'redux-logger';
 import todoSlice from './todoSlice';
 import {useDispatch} from 'react-redux';
 import commonSlice from './commonSlice';
+import userSlice from './userSlice';
 
 const store = configureStore({
   reducer: {
     todoList: todoSlice,
     common: commonSlice,
+    users: userSlice
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({serializableCheck: false}).concat(logger),

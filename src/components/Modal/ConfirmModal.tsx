@@ -17,7 +17,7 @@ const ConfirmModal = ({onSubmit}: any) => {
     <View>
       <Modal isVisible={isModal}>
         <Modal.Container>
-          <Modal.Header title="Comback Soon!" />
+          <Modal.Header title="Comeback Soon!" />
           <Modal.Body>
             <Text style={styles.text}>Are you sure you want to logout ?</Text>
           </Modal.Body>
