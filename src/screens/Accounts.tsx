@@ -14,7 +14,7 @@ const Accounts = () => {
     <View style={styles.container}>
       <Text>{auth()?.currentUser?.displayName}</Text>
       <Button title="logout" onPress={() => dispatch(showModal(true))} />
-      <ConfirmModal onSubmit={() => dispatch(Logout())} />
+      <ConfirmModal onSubmit={() => dispatch(Logout())} /> 
     </View>
   );
 };
