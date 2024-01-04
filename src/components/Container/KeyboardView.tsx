@@ -1,13 +1,20 @@
-import {Keyboard, KeyboardAvoidingView, StyleSheet} from 'react-native';
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 
 const KeyboardView = ({children, style}: any) => {
   return (
-    <KeyboardAvoidingView
-      onTouchStart={() => Keyboard.dismiss()}
-      style={[styles.container, style]}>
-      {children}
-    </KeyboardAvoidingView>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <KeyboardAvoidingView
+        onTouchStart={() => Keyboard.dismiss()}
+        style={[styles.container, style]}>
+        {children}
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
