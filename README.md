@@ -44,3 +44,35 @@ gradlew bundleRelease
 ```
 npx react-native run-android --variant=release
 ```
+# Graphql-Queries
+
+## Mutations
+
+GraphQL Operation that allows you to insert new data or modify the existing data on the server-side.
+
+### Register Mutation
+
+`Query`
+
+```graphql
+mutation Mutation($userInput: UserInput) {
+  register(userInput: $userInput) {
+    username
+    email
+    photoUrl
+  }
+}
+```
+
+ `Variables`
+
+```json
+{
+  "userInput": {
+    "username": "",
+    "email": "",
+    "password": "",
+    "photoUrl": ""
+  }
+}
+```
