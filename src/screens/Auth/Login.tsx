@@ -24,30 +24,6 @@ const Login = ({navigation}: any) => {
   const theme = useTheme();
   const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
 
-  GoogleSignin.configure({
-    webClientId:
-      '593672927589-ee90f9j0j9iab8eevuujgiitcfik8jb3.apps.googleusercontent.com',
-    offlineAccess: true,
-  });
-
-  const onGoogleButtonPress = async () => {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
-    const {idToken, user} = await GoogleSignin.signIn();
-    // if (idToken && user) {
-    //   navigation.navigate('Dashboard');
-    // }
-    console.log('idToken', idToken);
-    console.log('user', user);
-
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    console.log('googleCredential', googleCredential);
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  };
-
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={keyboardVerticalOffset}
