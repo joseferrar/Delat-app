@@ -1,8 +1,9 @@
 interface RegisterValues {
   username: string;
   email: string;
+  photoURL?: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
 
 interface LoginValues {

@@ -8,13 +8,13 @@ interface descObject {
   text: string;
 }
 
-type PostCardType = {
+type BoardCardProps = {
   title: string;
   onPress?: () => void;
   description: descObject[];
 };
 
-const BoardCard = ({title, description, onPress}: PostCardType) => {
+const BoardCard = ({title, description, onPress}: BoardCardProps) => {
   const theme = useTheme();
   return (
     <TouchableOpacity

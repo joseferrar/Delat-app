@@ -2,14 +2,14 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-type TimeCardType = {
+type TimeCardProps = {
   title: string;
   date?: string;
   type?: string;
   onPress?: () => void;
 };
 
-const TimeCard = ({title, date, type, onPress}: TimeCardType) => {
+const TimeCard = ({title, date, type, onPress}: TimeCardProps) => {
   return (
     <View style={styles.mainCardView}>
       <View>

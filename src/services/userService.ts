@@ -3,6 +3,8 @@ import {GoogleConfig} from '../utils/config';
 import auth from '@react-native-firebase/auth';
 import {Dispatch} from '@reduxjs/toolkit';
 import {showModal} from '../features/commonSlice';
+import {string} from 'yup';
+import {RegisterValues} from '../types/User';
 
 const GoogleService = async () => {
   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
@@ -23,10 +25,28 @@ const GoogleService = async () => {
 
 const Logout = () => async (dispatch: Dispatch) => {
   dispatch(showModal(false));
-  GoogleConfig();
-  await GoogleSignin.revokeAccess();
-  await GoogleSignin.signOut();
+  // GoogleConfig();
+  // await GoogleSignin.revokeAccess();
+  // await GoogleSignin.signOut();
   await auth().signOut();
 };
 
+export const RegisterService =
+  (value: RegisterValues) => async (dispatch: Dispatch) => {
+    await auth()
+      .createUserWithEmailAndPassword(value.email, value.password)
+      .then(result => {
+        // dispatch({type: REGISTER, payload: result});
+        console.log('result', result.user.getIdToken());
+
+        result?.user?.updateProfile({
+          displayName: value.username,
+          photoURL:
+            'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
+        });
+      })
+      .catch((error): any => {
+        console.log(error.message);
+      });
+  };
 export {GoogleService, Logout};

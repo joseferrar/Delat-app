@@ -5,10 +5,14 @@ import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import {registerValidate} from '../../utils/validate';
-import {RegisterValues} from '../../utils/ValueTypes';
+import {RegisterValues} from '../../types/User';
 import KeyboardView from '../../components/Container/KeyboardView';
+import {useAppDispatch} from '../../features';
+import {RegisterService} from '../../services/userService';
+import Home from '../../assets/svg/react.svg';
 
 const Register = (props: any) => {
+  const dispatch = useAppDispatch();
   const {navigation} = props;
   const theme = useTheme();
 
@@ -22,6 +26,7 @@ const Register = (props: any) => {
     validationSchema: registerValidate,
     onSubmit: async (data: RegisterValues) => {
       console.log(data);
+      dispatch(RegisterService(data));
     },
   });
 
@@ -30,6 +35,11 @@ const Register = (props: any) => {
       <Image
         source={require('../../assets/images/login_img.png')}
         style={styles.img}
+      />
+      <Home
+        width={50}
+        height={50}
+        style={{marginLeft: 'auto', marginRight: 'auto'}}
       />
       <Text style={[styles.heading, {color: theme.colors.text}]}>
         Welcome to Delat!

@@ -3,7 +3,7 @@ import React from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import useTheme from '../hooks/useTheme';
-import {testData} from '../utils/data';
+import {testData} from '../types/data';
 import {Modal} from '../components/Modal';
 import SumbitButton from '../components/Button/Button';
 import TextButton from '../components/Button/TextButton';

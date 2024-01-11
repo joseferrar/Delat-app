@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import RadioButton from '../components/Button/RadioButton';
-import {topics} from '../utils/topic';
+import {topics} from '../types/topic';
 import RadioCard from '../components/Card/RadioCard';
 import KeyboardView from '../components/Container/KeyboardView';
 import Notes from './Topics/Notes';
