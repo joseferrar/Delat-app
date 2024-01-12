@@ -7,6 +7,7 @@ import {string} from 'yup';
 import {RegisterValues} from '../types/User';
 
 const GoogleService = async () => {
+  GoogleConfig();
   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
   // Get the users ID token
   const {idToken, user} = await GoogleSignin.signIn();
