@@ -3,7 +3,7 @@ import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import Dashboard from '../../../screens/Dashboard';
 import Add from '../../../screens/Add';
-import {tabActive} from '../../../utils/tabActive';
+import TabActive, {tabActive} from './TabActive';
 import useTheme from '../../../hooks/useTheme';
 import Bookmark from '../../../screens/Bookmark';
 import Accounts from '../../../screens/Accounts';
@@ -18,16 +18,8 @@ function TabNavigation() {
     <Tab.Navigator
       screenOptions={({route, navigation}): any => ({
         tabBarHideOnKeyboard: true,
-        tabBarIcon: ({focused, color, size}: any) => {
-          return (
-            <Image
-              resizeMode="stretch"
-              source={tabActive(route, focused)}
-              style={
-                route.name === 'Add' ? styles.plus_active : styles.plus_inactive
-              }
-            />
-          );
+        tabBarIcon: ({focused}: any) => {
+          return TabActive(route, focused);
         },
 
         tabBarStyle: {
@@ -46,7 +38,6 @@ function TabNavigation() {
           color: navigation.isFocused()
             ? theme.colors.primary
             : theme.colors.text,
-
           fontFamily: 'Poppins-Bold',
         },
       })}>

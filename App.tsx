@@ -4,8 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
 import store from './src/features';
-import HomeNavigation from './src/components/navigation/HomeNavigation';
-import AuthNavigation from './src/components/navigation/AuthNavigation';
+import HomeNavigation from './src/components/navigation/stack/HomeNavigation';
+import AuthNavigation from './src/components/navigation/stack/AuthNavigation';
 import {Text} from 'react-native';
 import {User} from '@react-native-google-signin/google-signin';
 
