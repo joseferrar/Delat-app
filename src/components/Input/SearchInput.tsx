@@ -8,12 +8,44 @@ import {
   Image,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import Voice from '@react-native-voice/voice';
 
-const SearchInput = () => {
+const SearchInput = ({search, setSearch}: any) => {
+  const [text, setText] = useState<any>('');
+  const [isListening, setIsListening] = useState(false);
+
+  useEffect(() => {
+    Voice.onSpeechResults = (e: any) => {
+      console.log('Speech results:', e.value[0]);
+      setSearch(e.value[0]);
+      stopListening();
+      setIsListening(false);
+    };
+
+    Voice.onSpeechEnd = () => {
+      setIsListening(false);
+    };
+    Voice.onSpeechError = () => {
+      setIsListening(false);
+    };
+  }, []);
+
+  const stopListening = () => {
+    setIsListening(false);
+    Voice.stop();
+  };
+
+  const startListening = () => {
+    setIsListening(true);
+    Voice.start('en-US');
+  };
+
+  console.log('isListening', search);
+
   return (
     <View style={styles.input_container}>
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity activeOpacity={0.5} disabled>
         <Image
           style={styles.icon}
           source={require('../../assets/images/menu.png')}
@@ -21,14 +53,29 @@ const SearchInput = () => {
       </TouchableOpacity>
       <TextInput
         style={styles.input}
-        placeholder={'search'}
+        placeholder={'Search'}
         placeholderTextColor="rgb(150,150,150)"
-        //   onChangeText={e => changeHandler(e)}
+        value={search}
+        onChangeText={(e: any) => setSearch(e)}
       />
-      <Image
-        style={styles.right_icon}
-        source={{uri: auth()?.currentUser?.photoURL || ''}}
-      />
+
+      {/* <TouchableOpacity activeOpacity={0.5} onPress={stopListening}>
+        <Image
+          source={require('../../assets/images/dots_blue.gif')}
+          style={{width: 40, height: 40}}
+        />{' '}
+      </TouchableOpacity> */}
+
+      <TouchableOpacity activeOpacity={0.5} onPress={startListening}>
+        {/* <Image
+          style={styles.right_icon}
+          source={{uri: auth()?.currentUser?.photoURL || ''}}
+        /> */}
+        <Image
+          source={isListening ?  require('../../assets/images/dots_blue.gif') :require('../../assets/images/mic.png') }
+          style={{width: 40, height: 40}}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
