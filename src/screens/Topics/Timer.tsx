@@ -4,7 +4,9 @@ import React from 'react';
 const Timer = () => {
   return (
     <View>
-      <Text>Timer</Text>
+      <Text style={{textAlign: 'center', fontSize: 18, color: '#000'}}>
+        Timer
+      </Text>
     </View>
   );
 };

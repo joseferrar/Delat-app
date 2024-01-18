@@ -18,7 +18,7 @@ const SearchInput = ({search, setSearch}: any) => {
   useEffect(() => {
     Voice.onSpeechResults = (e: any) => {
       console.log('Speech results:', e.value[0]);
-      setSearch(e.value[0]);
+      setSearch(e.value[0] || '');
       stopListening();
       setIsListening(false);
     };

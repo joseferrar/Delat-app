@@ -16,17 +16,18 @@ export const testData: TestDate[] = [
     title: 'Leo',
     image: '',
     desc: [
-      {id: 21, text: 'Bad'},
-      {id: 22, text: 'Ass'},
+      {id: 21, text: 'Vijay'},
+      {id: 22, text: 'Lokesh'},
+      {id: 23, text: 'Arjun'},
     ],
   },
   {
     id: 2,
-    title: 'Master',
+    title: 'Call of duty',
     image: '',
     desc: [
-      {id: 23, text: 'JD'},
-      {id: 24, text: 'KD'},
+      {id: 24, text: 'cold war'},
+      {id: 25, text: 'ww2'},
     ],
   },
 ];

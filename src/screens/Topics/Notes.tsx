@@ -3,8 +3,10 @@ import React from 'react';
 
 const Notes = () => {
   return (
-    <View style={{alignItems: 'center'}}>
-      <Text>Notes</Text>
+    <View>
+      <Text style={{textAlign: 'center', fontSize: 18, color: '#000'}}>
+        Notes
+      </Text>
     </View>
   );
 };
