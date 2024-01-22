@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Provider} from 'react-redux';
+import {ApolloProvider} from '@apollo/client';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import auth from '@react-native-firebase/auth';
@@ -8,11 +9,9 @@ import HomeNavigation from './src/components/navigation/stack/HomeNavigation';
 import AuthNavigation from './src/components/navigation/stack/AuthNavigation';
 import {Text} from 'react-native';
 import {User} from '@react-native-google-signin/google-signin';
-import {APOLLO_SERVER} from '@env';
+import {httpLink} from './src/graphql/httpLink';
 
 function App() {
-  console.log(APOLLO_SERVER);
-
   const [user, setUser] = useState<User | null>(null);
   const [initializing, setInitializing] = useState<boolean>(true);
   const [loading, setLoading] = useState(true);
@@ -37,11 +36,13 @@ function App() {
   }
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        {user ? <HomeNavigation /> : <AuthNavigation />}
-      </NavigationContainer>
-    </Provider>
+    <ApolloProvider client={httpLink}>
+      <Provider store={store}>
+        <NavigationContainer>
+          {user ? <HomeNavigation /> : <AuthNavigation />}
+        </NavigationContainer>
+      </Provider>
+    </ApolloProvider>
   );
 }
 
