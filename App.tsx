@@ -8,8 +8,11 @@ import HomeNavigation from './src/components/navigation/stack/HomeNavigation';
 import AuthNavigation from './src/components/navigation/stack/AuthNavigation';
 import {Text} from 'react-native';
 import {User} from '@react-native-google-signin/google-signin';
+import {APOLLO_SERVER} from '@env';
 
 function App() {
+  console.log(APOLLO_SERVER);
+
   const [user, setUser] = useState<User | null>(null);
   const [initializing, setInitializing] = useState<boolean>(true);
   const [loading, setLoading] = useState(true);
