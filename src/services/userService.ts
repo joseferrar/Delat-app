@@ -3,8 +3,13 @@ import {GoogleConfig} from '../utils/config';
 import auth from '@react-native-firebase/auth';
 import {Dispatch} from '@reduxjs/toolkit';
 import {showModal} from '../features/commonSlice';
-import {string} from 'yup';
-import {RegisterValues} from '../types/User';
+import {LoginValues, RegisterValues} from '../types/User';
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) {
+    return error.message;
+  }
+}
 
 const GoogleService = async () => {
   GoogleConfig();
@@ -29,6 +34,7 @@ const Logout = () => async (dispatch: Dispatch) => {
   // GoogleConfig();
   // await GoogleSignin.revokeAccess();
   // await GoogleSignin.signOut();
+  // GoogleSignin.revokeAccess();
   await auth().signOut();
 };
 
@@ -46,8 +52,22 @@ export const RegisterService =
             'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
         });
       })
-      .catch((error): any => {
-        console.log(error.message);
+      .catch(error => {
+        console.log(getErrorMessage(error));
       });
   };
+
+export const LoginService =
+  (value: LoginValues) => async (dispatch: Dispatch) => {
+    await auth()
+      .signInWithEmailAndPassword(value.email, value.password)
+      .then(result => {
+        // dispatch({type: LOGIN, payload: result});
+        console.log(result.user);
+      })
+      .catch(error => {
+        console.log(getErrorMessage(error));
+      });
+  };
+
 export {GoogleService, Logout};

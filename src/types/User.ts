@@ -7,10 +7,8 @@ interface RegisterValues {
 }
 
 interface LoginValues {
-  username: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 export type {RegisterValues, LoginValues};

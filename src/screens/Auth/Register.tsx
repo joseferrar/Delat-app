@@ -9,7 +9,6 @@ import {RegisterValues} from '../../types/User';
 import KeyboardView from '../../components/Container/KeyboardView';
 import {useAppDispatch} from '../../features';
 import {RegisterService} from '../../services/userService';
-import Home from '../../assets/svg/react.svg';
 
 const Register = (props: any) => {
   const dispatch = useAppDispatch();
@@ -25,21 +24,15 @@ const Register = (props: any) => {
     },
     validationSchema: registerValidate,
     onSubmit: async (data: RegisterValues) => {
-      console.log(data);
       dispatch(RegisterService(data));
     },
   });
 
   return (
-    <KeyboardView style={{backgroundColor: theme.colors.background}}>
+    <KeyboardView style={styles.container}>
       <Image
-        source={require('../../assets/images/login_img.png')}
+        source={require('../../assets/images/ic_launcher_round.png')}
         style={styles.img}
-      />
-      <Home
-        width={50}
-        height={50}
-        style={{marginLeft: 'auto', marginRight: 'auto'}}
       />
       <Text style={[styles.heading, {color: theme.colors.text}]}>
         Welcome to Delat!
@@ -49,14 +42,14 @@ const Register = (props: any) => {
         color={theme.colors.text}
         value={formik.values.username}
         onChangeText={formik.handleChange('username')}
-        error={formik.errors.username}
+        error={formik.touched.username && formik.errors.username}
       />
       <Input
         placeholder="Email"
         color={theme.colors.text}
         value={formik.values.email}
         onChangeText={formik.handleChange('email')}
-        error={formik.errors.email}
+        error={formik.touched.email && formik.errors.email}
       />
       <Input
         placeholder="Password"
@@ -64,7 +57,7 @@ const Register = (props: any) => {
         secureTextEntry={true}
         value={formik.values.password}
         onChangeText={formik.handleChange('password')}
-        error={formik.errors.password}
+        error={formik.touched.password && formik.errors.password}
       />
       <Input
         placeholder="Confirm Password"
@@ -72,7 +65,7 @@ const Register = (props: any) => {
         secureTextEntry={true}
         value={formik.values.confirmPassword}
         onChangeText={formik.handleChange('confirmPassword')}
-        error={formik.errors.confirmPassword}
+        error={formik.touched.confirmPassword && formik.errors.confirmPassword}
       />
       <Button
         title="Submit"
@@ -99,7 +92,7 @@ export default Register;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 50,
   },
   section: {
     flexGrow: 1,

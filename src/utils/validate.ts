@@ -9,3 +9,8 @@ export const registerValidate = yup.object().shape({
     .required('Confirm Password must be required')
     .oneOf([yup.ref('password'), ''], 'Password not match'),
 });
+
+export const loginValidate = yup.object().shape({
+  email: yup.string().email().required('Email must be required'),
+  password: yup.string().min(8).required('Password must be required'),
+});

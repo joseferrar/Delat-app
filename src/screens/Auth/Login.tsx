@@ -1,53 +1,66 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import React from 'react';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useFormik} from 'formik';
 import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import TextButton from '../../components/Button/TextButton';
 import IconButton from '../../components/Button/IconButton';
 import {useAppDispatch} from '../../features';
-import {GoogleLogin} from '../../features/userSlice';
-import {GoogleService} from '../../services/userService';
+import {GoogleService, LoginService} from '../../services/userService';
+import KeyboardView from '../../components/Container/KeyboardView';
+import {LoginValues} from '../../types/User';
+import {loginValidate} from '../../utils/validate';
 
 const Login = ({navigation}: any) => {
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
+  const formik = useFormik<LoginValues>({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: loginValidate,
+    onSubmit: async (data: LoginValues) => {
+      dispatch(LoginService(data));
+    },
+  });
 
   return (
-    <KeyboardAvoidingView
-      keyboardVerticalOffset={keyboardVerticalOffset}
-      style={[styles.container, {backgroundColor: theme.colors.background}]}>
+    <KeyboardView style={styles.container}>
       <ScrollView contentContainerStyle={styles.section}>
         <Image
-          source={require('../../assets/images/login_img.png')}
+          source={require('../../assets/images/ic_launcher_round.png')}
           style={styles.img}
         />
         <Text style={[styles.heading, {color: theme.colors.text}]}>
           Continue to Delat!
         </Text>
-        <Input placeholder="Email" color={theme.colors.text} />
+        <Input
+          placeholder="Email"
+          color={theme.colors.text}
+          value={formik.values.email}
+          onChangeText={formik.handleChange('email')}
+          error={formik.touched.email && formik.errors.email}
+        />
         <Input
           placeholder="Password"
           color={theme.colors.text}
           secureTextEntry={true}
+          value={formik.values.password}
+          onChangeText={formik.handleChange('password')}
+          error={formik.touched.password && formik.errors.password}
         />
         <TextButton
           title="Forgot Password?"
           onPress={theme.toggleTheme}
           style={styles.forgot_btn}
         />
-        <Button title="Login" style={styles.button} />
+        <Button
+          title="Login"
+          style={styles.button}
+          onPress={formik.handleSubmit}
+        />
         <Image
           source={
             theme.currentTheme === 'light'
@@ -74,7 +87,7 @@ const Login = ({navigation}: any) => {
           </Text>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardView>
   );
 };
 
@@ -82,7 +95,7 @@ export default Login;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 60,
   },
   section: {
     flexGrow: 1,
@@ -91,16 +104,13 @@ const styles = StyleSheet.create({
   img: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    width: 240,
-    height: 200,
   },
   button: {
     margin: 12,
   },
   forgot_btn: {
     marginLeft: 'auto',
-    marginRight: 14,
-    marginTop: 8,
+    marginRight: 16,
   },
   diverIcon: {
     marginLeft: 'auto',

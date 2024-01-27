@@ -10,6 +10,8 @@ import AuthNavigation from './src/components/navigation/stack/AuthNavigation';
 import {Text} from 'react-native';
 import {User} from '@react-native-google-signin/google-signin';
 import {httpLink} from './src/graphql/httpLink';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
