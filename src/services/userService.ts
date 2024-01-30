@@ -2,7 +2,7 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {GoogleConfig} from '../utils/config';
 import auth from '@react-native-firebase/auth';
 import {Dispatch} from '@reduxjs/toolkit';
-import {showModal} from '../features/commonSlice';
+import {IsLoading, showModal} from '../features/commonSlice';
 import {LoginValues, RegisterValues} from '../types/User';
 
 function getErrorMessage(error: unknown) {
@@ -40,6 +40,7 @@ const Logout = () => async (dispatch: Dispatch) => {
 
 export const RegisterService =
   (value: RegisterValues) => async (dispatch: Dispatch) => {
+    dispatch(IsLoading(true));
     await auth()
       .createUserWithEmailAndPassword(value.email, value.password)
       .then(result => {
@@ -51,6 +52,7 @@ export const RegisterService =
           photoURL:
             'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
         });
+        dispatch(IsLoading(false));
       })
       .catch(error => {
         console.log(getErrorMessage(error));
@@ -59,13 +61,16 @@ export const RegisterService =
 
 export const LoginService =
   (value: LoginValues) => async (dispatch: Dispatch) => {
+    dispatch(IsLoading(true));
     await auth()
       .signInWithEmailAndPassword(value.email, value.password)
       .then(result => {
         // dispatch({type: LOGIN, payload: result});
+        dispatch(IsLoading(false));
         console.log(result.user);
       })
       .catch(error => {
+        dispatch(IsLoading(false));
         console.log(getErrorMessage(error));
       });
   };
