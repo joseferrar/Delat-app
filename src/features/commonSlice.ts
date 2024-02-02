@@ -5,14 +5,14 @@ type CommonState = {
   loading: boolean;
 };
 
-const initialState: CommonState = {
+const commonState: CommonState = {
   isModal: false,
   loading: false,
 };
 
 const commonSlice = createSlice({
   name: 'modal',
-  initialState,
+  initialState: commonState,
   reducers: {
     showModal: (state: CommonState, {payload}) => {
       state.isModal = payload;
