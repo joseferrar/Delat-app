@@ -4,6 +4,9 @@ import auth from '@react-native-firebase/auth';
 import {Dispatch} from '@reduxjs/toolkit';
 import {IsLoading, showModal} from '../features/commonSlice';
 import {LoginValues, RegisterValues} from '../types/User';
+import {client} from '../graphql/httpLink';
+import {REGISTER_QUERY} from '../graphql/mutations/userMutation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
@@ -41,21 +44,34 @@ const Logout = () => async (dispatch: Dispatch) => {
 export const RegisterService =
   (value: RegisterValues) => async (dispatch: Dispatch) => {
     dispatch(IsLoading(true));
+
     await auth()
       .createUserWithEmailAndPassword(value.email, value.password)
       .then(result => {
-        // dispatch({type: REGISTER, payload: result});
-        console.log('result', result.user.getIdToken());
-
         result?.user?.updateProfile({
           displayName: value.username,
           photoURL:
             'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
         });
-        dispatch(IsLoading(false));
+        const userInput = {
+          username: value.username,
+          email: value.email,
+          photoUrl:
+            'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
+        };
+
+        client.mutate({
+          mutation: REGISTER_QUERY,
+          variables: {userInput: userInput},
+        });
+        result?.user?.getIdToken().then(userId => {
+          console.log('result', userId);
+          AsyncStorage.setItem('my-key', userId);
+        });
       })
       .catch(error => {
         console.log(getErrorMessage(error));
+        dispatch(IsLoading(false));
       });
   };
 

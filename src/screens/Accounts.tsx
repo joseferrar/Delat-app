@@ -7,14 +7,21 @@ import {useAppDispatch} from '../features';
 import {showModal} from '../features/commonSlice';
 import ConfirmModal from '../components/Modal/ConfirmModal';
 import {Logout} from '../services/userService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Accounts = () => {
   const dispatch = useAppDispatch();
+  const removeFC = async () => {
+    await AsyncStorage.removeItem('my-key');
+  };
+  console.log(AsyncStorage.getItem('my-key'));
+
   return (
     <View style={styles.container}>
       <Text>{auth()?.currentUser?.displayName}</Text>
       <Button title="logout" onPress={() => dispatch(showModal(true))} />
-      <ConfirmModal onSubmit={() => dispatch(Logout())} /> 
+      <Button title="remove Token" onPress={() => removeFC()} />
+      <ConfirmModal onSubmit={() => dispatch(Logout())} />
     </View>
   );
 };

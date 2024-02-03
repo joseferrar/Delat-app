@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import {ApolloProvider} from '@apollo/client';
 import SplashScreen from 'react-native-splash-screen';
 import store from './src/features';
-import {httpLink} from './src/graphql/httpLink';
+import {client} from './src/graphql/httpLink';
 import {LogBox} from 'react-native';
 import RootNavigation from './src/components/navigation/stack/RootNavigation';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   return (
-    <ApolloProvider client={httpLink}>
+    <ApolloProvider client={client}>
       <Provider store={store}>
         <RootNavigation />
       </Provider>

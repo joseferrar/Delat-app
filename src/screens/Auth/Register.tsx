@@ -24,7 +24,7 @@ const Register = (props: any) => {
     },
     validationSchema: registerValidate,
     onSubmit: async (data: RegisterValues) => {
-      dispatch(RegisterService(data));
+      await dispatch(RegisterService(data));
     },
   });
 
