@@ -7,6 +7,7 @@ import {LoginValues, RegisterValues} from '../types/User';
 import {client} from '../graphql/httpLink';
 import {REGISTER_QUERY} from '../graphql/mutations/userMutation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {errorToast, successToast} from '../utils/toast';
 
 function getErrorMessage(error: unknown) {
   if (error instanceof Error) {
@@ -37,13 +38,16 @@ const Logout = () => async (dispatch: Dispatch) => {
   // GoogleConfig();
   // await GoogleSignin.revokeAccess();
   // await GoogleSignin.signOut();
-  // GoogleSignin.revokeAccess();
   await auth().signOut();
+  successToast({
+    title: 'Logout Successfully',
+    description: 'Come back soon!',
+  });
 };
 
-export const RegisterService =
+const RegisterService =
   (value: RegisterValues) => async (dispatch: Dispatch) => {
-    dispatch(IsLoading(true));
+    // dispatch(IsLoading(true));
 
     await auth()
       .createUserWithEmailAndPassword(value.email, value.password)
@@ -70,25 +74,36 @@ export const RegisterService =
         });
       })
       .catch(error => {
+        errorToast({
+          title: 'Invalid user credentials',
+          description: getErrorMessage(error),
+        });
         console.log(getErrorMessage(error));
         dispatch(IsLoading(false));
       });
   };
 
-export const LoginService =
-  (value: LoginValues) => async (dispatch: Dispatch) => {
-    dispatch(IsLoading(true));
-    await auth()
-      .signInWithEmailAndPassword(value.email, value.password)
-      .then(result => {
-        // dispatch({type: LOGIN, payload: result});
-        dispatch(IsLoading(false));
-        console.log(result.user);
-      })
-      .catch(error => {
-        dispatch(IsLoading(false));
-        console.log(getErrorMessage(error));
+const LoginService = (value: LoginValues) => async (dispatch: Dispatch) => {
+  // dispatch(IsLoading(true));
+  await auth()
+    .signInWithEmailAndPassword(value.email, value.password)
+    .then(result => {
+      // dispatch({type: LOGIN, payload: result});
+      dispatch(IsLoading(false));
+      successToast({
+        title: 'Welcome back!',
+        description: String(result?.user?.displayName),
       });
-  };
+      console.log(result.user);
+    })
+    .catch(error => {
+      errorToast({
+        title: 'Invalid user credentials',
+        description: getErrorMessage(error),
+      });
+      dispatch(IsLoading(false));
+      console.log(getErrorMessage(error));
+    });
+};
 
-export {GoogleService, Logout};
+export {GoogleService, Logout, RegisterService, LoginService};

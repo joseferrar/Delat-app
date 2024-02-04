@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {ApolloProvider} from '@apollo/client';
 import SplashScreen from 'react-native-splash-screen';
+import Toast from 'react-native-toast-message';
 import store from './src/features';
 import {client} from './src/graphql/httpLink';
 import {LogBox} from 'react-native';
@@ -17,6 +18,7 @@ function App() {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <RootNavigation />
+        <Toast />
       </Provider>
     </ApolloProvider>
   );
