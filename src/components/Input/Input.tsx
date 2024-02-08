@@ -11,7 +11,7 @@ type InputProps = {
   style?: ViewStyle;
   color: string | undefined;
   secureTextEntry?: boolean;
-  error?: FormikErrors<any> | any;
+  error?: FormikErrors<string> | any;
 };
 
 const Input = (props: InputProps) => {

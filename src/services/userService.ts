@@ -89,6 +89,10 @@ const LoginService = (value: LoginValues) => async (dispatch: Dispatch) => {
     .signInWithEmailAndPassword(value.email, value.password)
     .then(result => {
       // dispatch({type: LOGIN, payload: result});
+      result?.user?.getIdToken().then(userId => {
+        console.log('result', userId);
+        AsyncStorage.setItem('my-key', userId);
+      });
       dispatch(IsLoading(false));
       successToast({
         title: 'Welcome back!',

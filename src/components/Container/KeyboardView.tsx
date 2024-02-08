@@ -1,28 +1,29 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Keyboard,
-  KeyboardAvoidingView,
   StyleSheet,
   ScrollView,
-  Platform,
+  TouchableWithoutFeedback,
+  ViewStyle,
 } from 'react-native';
 import React from 'react';
 import useTheme from '../../hooks/useTheme';
 
-const KeyboardView = ({children, style}: any) => {
-  const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0;
-  const theme = useTheme();
+type KeyboardViewType = {
+  children: any;
+  style?: ViewStyle;
+};
 
+const KeyboardView = ({children, style}: KeyboardViewType) => {
+  const theme = useTheme();
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={{backgroundColor: theme.colors.background}}>
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={keyboardVerticalOffset}
-        onTouchStart={() => Keyboard.dismiss()}
-        style={[styles.container, style]}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={[{flex: 1, backgroundColor: theme.colors.background}, style]}>
         {children}
-      </KeyboardAvoidingView>
-    </ScrollView>
+      </ScrollView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -31,6 +32,6 @@ export default KeyboardView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingBottom: 30,
+    // backgroundColor: theme.colors.background,
   },
 });
