@@ -1,4 +1,4 @@
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View, Text} from 'react-native';
 import React from 'react';
 import BoardCard from '../Card/BoardCard';
 
@@ -10,7 +10,7 @@ const BoardList = ({data, navigation}: any) => {
       ListFooterComponentStyle={styles.ListFooterComponentStyle}
       data={data}
       ListFooterComponent={() => <View style={styles.ListFooterComponent} />}
-      // ListEmptyComponent={<NotFound/>}
+      ListEmptyComponent={<Text>No Data</Text>}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
         <BoardCard title={item.title} description={item.desc} />

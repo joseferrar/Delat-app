@@ -35,7 +35,7 @@ const Dashboard = ({navigation}: any) => {
   console.log('results', results);
 
   return (
-    <KeyboardView style={{backgroundColor: theme.colors.background}}>
+    <View style={{flex: 1, backgroundColor: theme.colors.background}}>
       {/* <Text style={{color: theme.colors.text, textAlign: 'center'}}>
         {auth().currentUser?.email}
       </Text> */}
@@ -47,7 +47,7 @@ const Dashboard = ({navigation}: any) => {
         navigation={navigation}
       />
       <ConfirmModal onSubmit={logOut} />
-    </KeyboardView>
+    </View>
   );
 };
 

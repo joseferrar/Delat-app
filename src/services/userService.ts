@@ -57,21 +57,21 @@ const RegisterService =
           photoURL:
             'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
         });
-        const userInput = {
-          username: value.username,
-          email: value.email,
-          photoUrl:
-            'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
-        };
+        // const userInput = {
+        //   username: value.username,
+        //   email: value.email,
+        //   photoUrl:
+        //     'https://res.cloudinary.com/dwwmdn5p4/image/upload/v1638883125/my%20photo/user_icon_yizbqh.png',
+        // };
 
-        client.mutate({
-          mutation: REGISTER_QUERY,
-          variables: {userInput: userInput},
-        });
-        result?.user?.getIdToken().then(userId => {
-          console.log('result', userId);
-          AsyncStorage.setItem('my-key', userId);
-        });
+        // client.mutate({
+        //   mutation: REGISTER_QUERY,
+        //   variables: {userInput: userInput},
+        // });
+        // result?.user?.getIdToken().then(userId => {
+        //   console.log('result', userId);
+        //   AsyncStorage.setItem('my-key', userId);
+        // });
       })
       .catch(error => {
         errorToast({

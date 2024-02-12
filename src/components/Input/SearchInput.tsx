@@ -72,8 +72,12 @@ const SearchInput = ({search, setSearch}: any) => {
           source={{uri: auth()?.currentUser?.photoURL || ''}}
         /> */}
         <Image
-          source={isListening ?  require('../../assets/images/dots_blue.gif') :require('../../assets/images/mic.png') }
-          style={{width: 40, height: 40}}
+          source={
+            isListening
+              ? require('../../assets/images/dots_blue.gif')
+              : require('../../assets/images/mic.png')
+          }
+          style={{width: 30, height: 30}}
         />
       </TouchableOpacity>
     </View>
