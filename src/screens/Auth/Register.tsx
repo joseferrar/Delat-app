@@ -5,7 +5,7 @@ import useTheme from '../../hooks/useTheme';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import {registerValidate} from '../../utils/validate';
-import {RegisterValues} from '../../types/User';
+import {RegisterValues} from '../../types/FormValues';
 import KeyboardView from '../../components/Container/KeyboardView';
 import {useAppDispatch} from '../../features';
 import {RegisterService} from '../../services/userService';

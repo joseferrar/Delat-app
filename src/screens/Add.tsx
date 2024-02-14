@@ -9,7 +9,7 @@ import ListItems from './Topics/ListItems';
 import Timer from './Topics/Timer';
 
 const Add = () => {
-  const [title, setTitle] = useState('ListItems');
+  const [title, setTitle] = useState('List');
   return (
     <KeyboardView>
       <RadioCard style={styles.radioAlign}>
@@ -23,8 +23,8 @@ const Add = () => {
           />
         ))}
       </RadioCard>
-      {title === 'Notes' && <Notes />}
-      {title === 'ListItems' && <ListItems />}
+      {title === 'Note' && <Notes />}
+      {title === 'List' && <ListItems />}
       {title === 'Timer' && <Timer />}
     </KeyboardView>
   );

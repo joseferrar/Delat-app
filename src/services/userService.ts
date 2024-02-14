@@ -3,7 +3,7 @@ import {GoogleConfig} from '../utils/config';
 import auth from '@react-native-firebase/auth';
 import {Dispatch} from '@reduxjs/toolkit';
 import {IsLoading, showModal} from '../features/commonSlice';
-import {LoginValues, RegisterValues} from '../types/User';
+import {LoginValues, RegisterValues} from '../types/FormValues';
 import {client} from '../graphql/httpLink';
 import {REGISTER_QUERY} from '../graphql/mutations/userMutation';
 import AsyncStorage from '@react-native-async-storage/async-storage';

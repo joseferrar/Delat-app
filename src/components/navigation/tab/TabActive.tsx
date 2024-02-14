@@ -45,7 +45,7 @@ const TabActive = (route: any, focused: any) => {
       <PlusIcon
         color={focused ? theme.colors.primary : theme.colors.text}
         width={68}
-        height={80}
+        height={68}
       />
     );
   }

@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Poppins-Medium',
     color: '#000',
+    letterSpacing: 0.8,
   },
 });

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const registerValidate = yup.object().shape({
+const registerValidate = yup.object().shape({
   username: yup.string().required('Username must be required'),
   email: yup.string().email().required('Email must be required'),
   password: yup.string().min(8).required('Password must be required'),
@@ -10,7 +10,13 @@ export const registerValidate = yup.object().shape({
     .oneOf([yup.ref('password'), ''], 'Password not match'),
 });
 
-export const loginValidate = yup.object().shape({
+const loginValidate = yup.object().shape({
   email: yup.string().email().required('Email must be required'),
   password: yup.string().min(8).required('Password must be required'),
 });
+
+const listValidate = yup.object().shape({
+  name: yup.string().required('Name must be required'),
+});
+
+export {registerValidate, loginValidate, listValidate};

@@ -29,7 +29,7 @@ const PlusIcon = ({color, width, height}: SvgProps) => {
     <Svg
       width={width}
       height={height}
-      style={{marginTop: isKeyboardVisible ? 24 : -20, marginLeft: 12}}
+      style={{marginTop: isKeyboardVisible ? 24 : 22, marginLeft: 12}}
       viewBox="0 0 32 30"
       fill="none"
       x="http://www.w3.org/2000/svg">

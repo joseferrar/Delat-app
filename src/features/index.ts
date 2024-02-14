@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import todoSlice from './todoSlice';
+import todoSlice from './listSlice';
 import {useDispatch} from 'react-redux';
 import commonSlice from './commonSlice';
 import userSlice from './userSlice';

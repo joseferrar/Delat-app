@@ -9,7 +9,7 @@ import IconButton from '../../components/Button/IconButton';
 import {useAppDispatch} from '../../features';
 import {GoogleService, LoginService} from '../../services/userService';
 import KeyboardView from '../../components/Container/KeyboardView';
-import {LoginValues} from '../../types/User';
+import {LoginValues} from '../../types/FormValues';
 import {loginValidate} from '../../utils/validate';
 
 const Login = ({navigation}: any) => {

@@ -6,11 +6,11 @@ interface TOPIC {
 export const topics: TOPIC[] = [
   {
     id: 1,
-    topic: 'Notes',
+    topic: 'Note',
   },
   {
     id: 2,
-    topic: 'ListItems',
+    topic: 'List',
   },
   {
     id: 3,

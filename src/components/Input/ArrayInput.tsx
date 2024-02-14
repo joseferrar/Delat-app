@@ -10,19 +10,28 @@ import {
 import React from 'react';
 
 type ARRAY_INPUT = {
-  placeholder: string;
+  value: string | undefined;
+  placeholder: string | undefined;
+  onChangeText: (value: string) => void;
+  onClose: () => void;
 };
 
-const ArrayInput = ({placeholder}: ARRAY_INPUT) => {
+const ArrayInput = ({
+  placeholder,
+  value,
+  onChangeText,
+  onClose,
+}: ARRAY_INPUT) => {
   return (
     <View style={styles.input_container}>
       <TextInput
+        value={value}
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor="rgb(150,150,150)"
-        //   onChangeText={e => changeHandler(e)}
+        onChangeText={onChangeText}
       />
-      <TouchableOpacity activeOpacity={0.6}>
+      <TouchableOpacity activeOpacity={0.6} onPress={onClose}>
         <Image
           style={styles.right_icon}
           source={require('../../assets/images/close_icon.png')}
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
   },
   input: {
     color: '#000',
-    fontSize: 16,
+    fontSize: 14,
     width: '85%',
     height: 50,
     fontFamily: 'Poppins-Regular',

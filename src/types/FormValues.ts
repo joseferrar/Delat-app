@@ -11,4 +11,13 @@ interface LoginValues {
   password: string;
 }
 
-export type {RegisterValues, LoginValues};
+interface Items {
+  item: string;
+}
+
+interface ListValues {
+  name: string;
+  items: Items[];
+}
+
+export type {RegisterValues, LoginValues, ListValues};

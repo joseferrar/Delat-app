@@ -1,4 +1,11 @@
-import {StyleSheet, TextInput, ViewStyle, Text} from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  ViewStyle,
+  Text,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import React from 'react';
 import {FormikErrors} from 'formik';
 import useTheme from '../../hooks/useTheme';
@@ -6,6 +13,7 @@ import useTheme from '../../hooks/useTheme';
 type InputProps = {
   value?: string | undefined;
   onChangeText?: ((e: string) => void) | undefined;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   placeholder?: string | undefined;
   disabled?: boolean | undefined;
   style?: ViewStyle;
@@ -20,6 +28,7 @@ const Input = (props: InputProps) => {
   const {
     value,
     onChangeText,
+    onBlur,
     disabled,
     placeholder,
     style,
@@ -36,6 +45,7 @@ const Input = (props: InputProps) => {
         editable={disabled}
         placeholderTextColor={color}
         secureTextEntry={secureTextEntry}
+        onBlur={onBlur}
         style={[
           styles.input,
           {color: color, borderColor: error ? 'red' : theme.colors.primary},
