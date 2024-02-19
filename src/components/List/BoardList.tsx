@@ -13,7 +13,7 @@ const BoardList = ({data, navigation}: any) => {
       ListEmptyComponent={<Text>No Data</Text>}
       keyExtractor={(item, index) => index.toString()}
       renderItem={({item}) => (
-        <BoardCard title={item.title} description={item.desc} />
+        <BoardCard title={item?.name} description={item?.items} id={item?.id} />
       )}
     />
   );

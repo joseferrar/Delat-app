@@ -48,14 +48,15 @@ const Remainder = () => {
     <KeyboardView style={{backgroundColor: theme.colors.background}}>
       <SearchInput />
       <TimeCard title="Client Meeting" date="33-34-233" type="Office" />
-      <Text>
+      <TimeCard title="Music remaining" date="33-34-233" type="Office" />
+      {/* <Text>
         {' '}
         {hours}:{minutes.toString().padStart(2, '0')}:
         {seconds.toString().padStart(2, '0')}:
         {milliseconds.toString().padStart(2, '0')}
       </Text>
       <Button title={isRunning ? 'Stop' : 'Start'} onPress={startAndStop} />
-      <Button title="Reset" onPress={reset} />
+      <Button title="Reset" onPress={reset} /> */}
     </KeyboardView>
   );
 };

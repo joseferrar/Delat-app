@@ -3,11 +3,13 @@ import {createSlice} from '@reduxjs/toolkit';
 type CommonState = {
   isModal: boolean;
   loading: boolean;
+  isDate: boolean;
 };
 
 const commonState: CommonState = {
   isModal: false,
   loading: false,
+  isDate: false,
 };
 
 const commonSlice = createSlice({
@@ -20,8 +22,11 @@ const commonSlice = createSlice({
     IsLoading: (state: CommonState, {payload}) => {
       state.loading = payload;
     },
+    showDate: (state: CommonState, {payload}) => {
+      state.isDate = payload;
+    },
   },
 });
 
 export default commonSlice.reducer;
-export const {showModal, IsLoading} = commonSlice.actions;
+export const {showModal, IsLoading, showDate} = commonSlice.actions;

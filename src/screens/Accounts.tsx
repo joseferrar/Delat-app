@@ -18,9 +18,9 @@ const Accounts = () => {
 
   return (
     <View style={styles.container}>
-      <Text>{auth()?.currentUser?.displayName}</Text>
+      <Text style={styles.displayName}>{auth()?.currentUser?.displayName}</Text>
       <Button title="logout" onPress={() => dispatch(showModal(true))} />
-      <Button title="remove Token" onPress={() => removeFC()} />
+      <Button title="remove Token" onPress={() => removeFC()} style={styles.token_btn}/>
       <ConfirmModal onSubmit={() => dispatch(Logout())} />
     </View>
   );
@@ -34,4 +34,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  token_btn: {
+    marginTop: 16
+  },
+  displayName: {
+    fontSize: 20,
+    fontFamily: 'Poppins-Medium',
+    color: 'green',
+  }
 });

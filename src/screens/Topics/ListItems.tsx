@@ -1,21 +1,29 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
 import {FieldArray, Formik} from 'formik';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Input from '../../components/Input/Input';
 import useTheme from '../../hooks/useTheme';
 import ArrayInput from '../../components/Input/ArrayInput';
 import Button from '../../components/Button/Button';
 import {ListValues} from '../../types/FormValues';
 import {listValidate} from '../../utils/validate';
-import {useAppDispatch} from '../../features';
+import {RootState, useAppDispatch} from '../../features';
 import {AddList} from '../../services/ListService';
+import {showDate} from '../../features/commonSlice';
+import {TimeFormat} from '../../utils/DateTime';
+import {useSelector} from 'react-redux';
 
-const ListItems = () => {
+const ListItem = () => {
+  const {isDate} = useSelector((state: RootState) => state.common);
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const date = new Date(Date.now());
+  const [selectedDate, setSelectedDate] = useState(date);
 
   const initialValues: ListValues = {
     name: '',
+    date: new Date(Date.now()),
     items: [
       {
         item: '',
@@ -23,6 +31,18 @@ const ListItems = () => {
     ],
   };
 
+  const showDatePicker = () => {
+    dispatch(showDate(true));
+  };
+
+  const hideDatePicker = () => {
+    dispatch(showDate(false));
+  };
+
+  const handleConfirm = (date1: Date) => {
+    setSelectedDate(date1);
+    hideDatePicker();
+  };
   return (
     <View>
       <Formik
@@ -54,16 +74,27 @@ const ListItems = () => {
               color={theme.colors.text}
               style={{backgroundColor: theme.colors.border}}
             />
-
-            {/* <Datepicker
+            <Text
+              style={[
+                styles.itemText,
+                {color: theme.colors.text, marginTop: -6},
+              ]}>
+              Date
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              style={styles.DateContainer}
+              onPress={showDatePicker}>
+              <Text style={styles.DateText}>{TimeFormat(selectedDate)}</Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              locale="en_GB"
               date={values.date}
-              size="large"
-              controlStyle={{ backgroundColor: "#fff" }}
-              style={styles.categoryInput}
-              accessoryRight={() => <Ionicons name="calendar-outline" size={24} />}
-              onSelect={(date1) => setFieldValue(`date`, date1)}
-
-            /> */}
+              isVisible={isDate}
+              mode="datetime"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
 
             <FieldArray name="items">
               {({push, remove}) => (
@@ -106,7 +137,7 @@ const ListItems = () => {
   );
 };
 
-export default ListItems;
+export default ListItem;
 
 const styles = StyleSheet.create({
   itemText: {
@@ -126,5 +157,20 @@ const styles = StyleSheet.create({
   },
   submit: {
     marginBottom: 75,
+  },
+  DateContainer: {
+    borderColor: '#6C63FF',
+    marginBottom: 8,
+    marginTop: 4,
+    marginLeft: 14,
+    marginRight: 14,
+    borderWidth: 2,
+    borderRadius: 12,
+    padding: 15,
+    backgroundColor: '#fff',
+  },
+  DateText: {
+    color: '#000',
+    fontSize: 18,
   },
 });

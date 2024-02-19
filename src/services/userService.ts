@@ -35,8 +35,8 @@ const GoogleService = async () => {
 
 const Logout = () => async (dispatch: Dispatch) => {
   dispatch(showModal(false));
-  // GoogleConfig();
-  // await GoogleSignin.revokeAccess();
+  GoogleConfig();
+  await GoogleSignin.revokeAccess();
   // await GoogleSignin.signOut();
   await auth().signOut();
   successToast({

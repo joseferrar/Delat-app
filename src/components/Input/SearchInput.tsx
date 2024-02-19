@@ -1,24 +1,20 @@
 import {
   StyleSheet,
-  Text,
   View,
-  Button,
   TouchableOpacity,
   TextInput,
   Image,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
 import React, {useState, useEffect} from 'react';
 import Voice from '@react-native-voice/voice';
 
 const SearchInput = ({search, setSearch}: any) => {
-  const [text, setText] = useState<any>('');
   const [isListening, setIsListening] = useState(false);
 
   useEffect(() => {
     Voice.onSpeechResults = (e: any) => {
-      console.log('Speech results:', e.value[0]);
-      setSearch(e.value[0] || '');
+      console.log('Speech results:', e?.value[0]);
+      setSearch(e?.value[0] || '');
       stopListening();
       setIsListening(false);
     };
@@ -59,18 +55,7 @@ const SearchInput = ({search, setSearch}: any) => {
         onChangeText={(e: any) => setSearch(e)}
       />
 
-      {/* <TouchableOpacity activeOpacity={0.5} onPress={stopListening}>
-        <Image
-          source={require('../../assets/images/dots_blue.gif')}
-          style={{width: 40, height: 40}}
-        />{' '}
-      </TouchableOpacity> */}
-
       <TouchableOpacity activeOpacity={0.5} onPress={startListening}>
-        {/* <Image
-          style={styles.right_icon}
-          source={{uri: auth()?.currentUser?.photoURL || ''}}
-        /> */}
         <Image
           source={
             isListening

@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import useTheme from '../hooks/useTheme';
@@ -8,16 +8,24 @@ import {Modal} from '../components/Modal';
 import SumbitButton from '../components/Button/Button';
 import TextButton from '../components/Button/TextButton';
 import ConfirmModal from '../components/Modal/ConfirmModal';
-import {useAppDispatch} from '../features';
+import {RootState, useAppDispatch} from '../features';
 import {showModal} from '../features/commonSlice';
 import SearchInput from '../components/Input/SearchInput';
 import KeyboardView from '../components/Container/KeyboardView';
 import BoardList from '../components/List/BoardList';
+import {useSelector} from 'react-redux';
+import {GetList} from '../services/ListService';
+import {ListValues} from '../types/FormValues';
 
 const Dashboard = ({navigation}: any) => {
+  const {listData} = useSelector((state: RootState) => state.lists);
   const [search, setSearch] = useState('');
   const theme = useTheme();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(GetList());
+  }, [dispatch]);
 
   const logOut = async () => {
     await GoogleSignin.revokeAccess();
@@ -28,11 +36,11 @@ const Dashboard = ({navigation}: any) => {
 
   const results = !search
     ? null
-    : testData.filter(item =>
-        item?.title.toLowerCase().includes(search.toLocaleLowerCase()),
+    : listData?.filter((item: ListValues) =>
+        item?.name.toLowerCase().includes(search.toLocaleLowerCase()),
       );
 
-  console.log('results', results);
+  console.log('results', listData);
 
   return (
     <View style={{flex: 1, backgroundColor: theme.colors.background}}>
@@ -43,10 +51,10 @@ const Dashboard = ({navigation}: any) => {
       {/* <Button title="logout" onPress={() => dispatch(showModal(true))} />
       <Button title="Dark mode" onPress={theme.toggleTheme} /> */}
       <BoardList
-        data={results === null ? testData : results}
+        data={results === null ? listData : results}
         navigation={navigation}
       />
-      <ConfirmModal onSubmit={logOut} />
+      {/* <ConfirmModal onSubmit={logOut} /> */}
     </View>
   );
 };

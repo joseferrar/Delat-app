@@ -16,7 +16,9 @@ interface Items {
 }
 
 interface ListValues {
+  id?: string;
   name: string;
+  date: Date;
   items: Items[];
 }
 
