@@ -26,13 +26,13 @@ function TabNavigation() {
           position: 'absolute',
           backgroundColor: theme.colors.info,
           borderColor: theme.colors.border,
-          borderWidth: 1,
+          borderWidth: 0,
           elevation: 4,
           height: 65,
-          borderRadius: 12,
-          bottom: 5,
-          marginLeft: 12,
-          marginRight: 12,
+          borderRadius: 0,
+          bottom: 0, //5
+          marginLeft: 0, // 12
+          marginRight: 0, // 12
         },
         tabBarLabelStyle: {
           color: navigation.isFocused()
@@ -64,7 +64,7 @@ function TabNavigation() {
       <Tab.Screen
         name="Accounts"
         component={Accounts}
-        options={{headerShown: false, tabBarLabel: 'Account'}}
+        options={{headerShown: false, tabBarLabel: 'Settings'}}
       />
     </Tab.Navigator>
   );

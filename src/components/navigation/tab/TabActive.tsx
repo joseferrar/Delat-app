@@ -5,6 +5,7 @@ import AlermIcon from '../../icons/AlermIcon';
 import BMarkIcon from '../../icons/PersonIcon';
 import MarkIcon from '../../icons/MarkIcon';
 import PlusIcon from '../../icons/PlusIcon';
+import SettingIcon from '../../icons/SettingIcon';
 
 const TabActive = (route: any, focused: any) => {
   const theme = useTheme();
@@ -26,7 +27,7 @@ const TabActive = (route: any, focused: any) => {
     );
   } else if (route.name === 'Accounts') {
     return (
-      <BMarkIcon
+      <SettingIcon
         color={focused ? theme.colors.primary : theme.colors.text}
         width={30}
         height={30}
