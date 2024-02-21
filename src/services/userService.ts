@@ -35,14 +35,22 @@ const GoogleService = async () => {
 
 const Logout = () => async (dispatch: Dispatch) => {
   dispatch(showModal(false));
-  GoogleConfig();
-  await GoogleSignin.revokeAccess();
-  // await GoogleSignin.signOut();
-  await auth().signOut();
-  successToast({
-    title: 'Logout Successfully',
-    description: 'Come back soon!',
-  });
+  if (auth().currentUser?.providerData[0].providerId === 'google.com') {
+    GoogleConfig();
+    GoogleSignin.revokeAccess();
+    GoogleSignin.signOut();
+    await auth().signOut();
+    successToast({
+      title: 'Logout Successfully',
+      description: 'Come back soon!',
+    });
+  } else {
+    await auth().signOut();
+    successToast({
+      title: 'Logout Successfully',
+      description: 'Come back soon!',
+    });
+  }
 };
 
 const RegisterService =

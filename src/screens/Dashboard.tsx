@@ -1,17 +1,9 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import useTheme from '../hooks/useTheme';
-import {testData} from '../types/data';
-import {Modal} from '../components/Modal';
-import SumbitButton from '../components/Button/Button';
-import TextButton from '../components/Button/TextButton';
-import ConfirmModal from '../components/Modal/ConfirmModal';
 import {RootState, useAppDispatch} from '../features';
-import {showModal} from '../features/commonSlice';
 import SearchInput from '../components/Input/SearchInput';
-import KeyboardView from '../components/Container/KeyboardView';
 import BoardList from '../components/List/BoardList';
 import {useSelector} from 'react-redux';
 import {GetList} from '../services/ListService';
@@ -26,13 +18,6 @@ const Dashboard = ({navigation}: any) => {
   useEffect(() => {
     dispatch(GetList());
   }, [dispatch]);
-
-  const logOut = async () => {
-    await GoogleSignin.revokeAccess();
-    await GoogleSignin.signOut();
-    await auth().signOut();
-    dispatch(showModal(false));
-  };
 
   const results = !search
     ? null
