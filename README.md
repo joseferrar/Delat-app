@@ -3,6 +3,10 @@
 ## npm version -- 9.6.7
 ## react native cli -- 0.70.10
 
+In the project android directory, you can add:
+
+#### `google-services.json`
+
 ### Install
 
 Install yarn or npm. Below commands assume you are using yarn.
