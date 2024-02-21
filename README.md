@@ -6,9 +6,12 @@
 ### Install
 
 Install yarn or npm. Below commands assume you are using yarn.
-
 ```
 npm install
+```
+
+```
+yarn
 ```
 
 ### Run
