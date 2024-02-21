@@ -7,6 +7,8 @@ In the project android directory, you can add:
 
 #### `google-services.json`
 
+[project settings](https://console.firebase.google.com/project/delat-8a359/settings/general/android:com.delat)
+
 ### Install
 
 Install yarn or npm. Below commands assume you are using yarn.
