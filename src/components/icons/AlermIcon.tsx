@@ -1,11 +1,12 @@
 import React from 'react';
 import Svg, {Path, SvgProps, ClipPath, Rect, Defs, G} from 'react-native-svg';
 
-const AlermIcon = ({color, width, height}: SvgProps) => {
+const AlermIcon = ({color, width, height, style}: SvgProps) => {
   return (
     <Svg
       width={width}
       height={height}
+      style={style}
       viewBox="0 0 24 24"
       fill="none"
       x="http://www.w3.org/2000/svg">
